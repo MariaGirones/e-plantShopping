@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addItem } from './CartSlice';
+import { addItem } from '../store/CartSlice';
 import './ProductList.css';
 import CartItem from './CartItem';
 
@@ -139,9 +139,9 @@ function ProductList({ onHomeClick }) {
                 },
                 {
                     id: 17,
-                    name: "Lavender",
+                    name: "Lavender Repellent",
                     image: "https://images.unsplash.com/photo-1611909023032-2d6b3134ecba?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                    description: "Calming scent, used in aromatherapy.",
+                    description: "Calming scent that also repels insects.",
                     cost: "20"
                 },
                 {
@@ -158,7 +158,7 @@ function ProductList({ onHomeClick }) {
             plants: [
                 {
                     id: 19,
-                    name: "Aloe Vera",
+                    name: "Aloe Vera Medicinal",
                     image: "https://cdn.pixabay.com/photo/2018/04/02/07/42/leaf-3283175_1280.jpg",
                     description: "Soothing gel used for skin ailments.",
                     cost: "14"
@@ -179,7 +179,7 @@ function ProductList({ onHomeClick }) {
                 },
                 {
                     id: 22,
-                    name: "Lemon Balm",
+                    name: "Lemon Balm Medicinal",
                     image: "https://cdn.pixabay.com/photo/2019/09/16/07/41/balm-4480134_1280.jpg",
                     description: "Calms nerves and promotes relaxation.",
                     cost: "14"
@@ -219,7 +219,7 @@ function ProductList({ onHomeClick }) {
                 },
                 {
                     id: 27,
-                    name: "Snake Plant",
+                    name: "Snake Plant Low Maintenance",
                     image: "https://cdn.pixabay.com/photo/2021/01/22/06/04/snake-plant-5939187_1280.jpg",
                     description: "Needs infrequent watering and is resilient to most pests.",
                     cost: "15"
@@ -300,14 +300,13 @@ function ProductList({ onHomeClick }) {
     };
 
     const handleAddToCart = (product) => {
-        dispatch(addItem(product)); // Despacha la acción para añadir el producto al carrito (acción Redux)
+        dispatch(addItem(product));
 
-        setAddedToCart((prevState) => ({ // Actualiza el estado local para reflejar que el producto ha sido añadido
-            ...prevState, // Extiende el estado anterior para conservar las entradas existentes
-            [product.id]: true, // Establece el ID del producto actual como clave con valor 'true' para marcarlo como añadido
+        setAddedToCart((prevState) => ({
+            ...prevState,
+            [product.id]: true,
         }));
         
-        // Muestra un mensaje de confirmación temporal
         setTimeout(() => {
             setAddedToCart((prevState) => ({
                 ...prevState,
